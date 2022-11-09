@@ -3,7 +3,7 @@
 //Fecha de entrega: 08.11.2022.
 
 //Forma de compilar:
-//  g++ main.cpp -o main -lfreeglut -lglew32 -lopengl32 -lopengl32 -lglu32
+//  g++ main.cpp -o main -lfreeglut -lglew32 -lopengl32 -lglu32
 
 //Inclusión de Librerías.
 #include <iostream>
