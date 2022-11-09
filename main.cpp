@@ -34,7 +34,7 @@ void inicializar(){
 }
 
 //Función que determina los valores de x y y para la formación de una línea mediante puntos, recibe dos Estructuras Punto (que son las que definen inicio y fin de la línea), retorna un vector de vectores de enteros con los datos x y y.
-vector<vector <int>> datosLinea(Punto punto1, Punto punto2){
+vector<vector <float>> datosLinea(Punto punto1, Punto punto2){
 
     Punto primero;
     Punto segundo;
@@ -44,10 +44,10 @@ vector<vector <int>> datosLinea(Punto punto1, Punto punto2){
     float pendiente;
     float yAux;
 
-    vector <int> x;
-    vector <int> y;
+    vector <float> x;
+    vector <float> y;
 
-    vector <vector <int>> resultado;
+    vector <vector <float>> resultado;
 
     if (punto1.x < punto2.x){
         primero.x = punto1.x;
@@ -80,23 +80,16 @@ vector<vector <int>> datosLinea(Punto punto1, Punto punto2){
 
     for (float i = primero.x; i<= segundo.x; i++){
 
-        int nuevaX;
-        int nuevaY;
-        nuevaY = round(yAux);
-        nuevaX = round(i);
-        x.push_back(nuevaX);
-        y.push_back(nuevaY);
+        x.push_back(i);
+        y.push_back(yAux);
 
-        if (pendiente != 1.0){
+        if (pendiente != 1.0){ //Evitar dibujado en exceso.
 
             float terminoMedio; //A solicitud del tutor: para aumentar la densidad de los puntos.
             terminoMedio = (yAux+yAux+pendiente)/2;
 
-            int otraY;
-            otraY = round(terminoMedio);
-
-            x.push_back(nuevaX);
-            y.push_back(otraY);
+            x.push_back(i);
+            y.push_back(terminoMedio);
 
         }
 
@@ -118,7 +111,7 @@ void myLines(){
     glColor3f(0.0,0.4,0.2); //Establecer: color de dibujado como = VERDE.
     glBegin(GL_POINTS); //Establecer: Cada vértice como un punto único.
 
-    vector<vector <int>> resultado1;
+    vector<vector <float>> resultado1;
     Punto tC1P1;
     tC1P1.x = 1;
     tC1P1.y = 2;
@@ -126,7 +119,7 @@ void myLines(){
     tC1P2.x = 100;
     tC1P2.y = 20;
 
-    vector<vector <int>> resultado2;
+    vector<vector <float>> resultado2;
     Punto tC2P1;
     tC2P1.x = 10;
     tC2P1.y = 200;
@@ -134,7 +127,7 @@ void myLines(){
     tC2P2.x = 50;
     tC2P2.y = 10;
 
-    vector<vector <int>> resultado3;
+    vector<vector <float>> resultado3;
     Punto tC3P1;
     tC3P1.x = 300;
     tC3P1.y = 300;
@@ -142,7 +135,7 @@ void myLines(){
     tC3P2.x = 10;
     tC3P2.y = 10;
 
-    vector<vector <int>> resultado4;
+    vector<vector <float>> resultado4;
     Punto tC4P1;
     tC4P1.x = 200;
     tC4P1.y = 300;
@@ -150,7 +143,7 @@ void myLines(){
     tC4P2.x = 250;
     tC4P2.y = 50;
 
-    vector<vector <int>> resultado5;
+    vector<vector <float>> resultado5;
     Punto tC5P1;
     tC5P1.x = 350;
     tC5P1.y = 350;
@@ -235,21 +228,14 @@ void myLine(){
 
     for (float i = primero.x; i<= segundo.x; i++){
 
-        int nuevaX;
-        int nuevaY;
-        nuevaY = round(yAux);
-        nuevaX = round(i);
-        glVertex2d(nuevaX,nuevaY); //Muestra en la Ventana de Display.
+        glVertex2d(i,yAux); //Muestra en la Ventana de Display.
 
         if (pendiente != 1.0){ //Evitar dibujado en exceso.
 
             float terminoMedio; //A solicitud del tutor: para aumentar la densidad de los puntos.
             terminoMedio = (yAux+yAux+pendiente)/2;
 
-            int otraY;
-            otraY = round(terminoMedio);
-
-            glVertex2d(nuevaX,otraY); //Muestra en la Ventana de Display.
+            glVertex2d(i,terminoMedio); //Muestra en la Ventana de Display.
         }
 
         yAux += pendiente;
